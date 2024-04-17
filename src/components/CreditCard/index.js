@@ -1,60 +1,68 @@
-// Write your code here
 import {useState} from 'react'
 
 import {
-  CreditCardContainer,
+  MainContainer,
+  CreditCardDetailsContainer,
+  CreditCardHeadingContainer,
+  CreditCardHeading,
+  HorizontalLine,
   CardContainer,
-  Heading,
-  InputHolderContainer,
   Card,
   CardNumber,
+  CardholderNameText,
+  CardholderName,
+  PaymentContainer,
+  PaymentMethodContainer,
+  PaymentMethodHeading,
   Input,
-  InputHolder,
-  CardName,
-  CardHolderName,
-  Horzental,
 } from './styledComponents'
 
 const CreditCard = () => {
-  const [number, setNumber] = useState('')
-  const [name, setName] = useState('')
+  const [cardNumber, setCardNumber] = useState('')
+  const [cardholderName, setCardHolderName] = useState('')
+  const cardholderNameInUppercase = cardholderName.toUpperCase()
 
-  const onChangeNumber = event => setNumber(event.target.value)
-  const onChangeName = event => setName(event.target.value)
+  const onChangeCardholderName = event => {
+    setCardHolderName(event.target.value)
+  }
 
-  const nameFiled = name.toUpperCase()
+  const onChangeCardNumber = event => {
+    setCardNumber(event.target.value)
+  }
 
   return (
-    <CreditCardContainer data-testid="creditCard">
-      <CardContainer>
-        <div>
-          <Heading>CREDIT CARD</Heading>
-          <Horzental />
-        </div>
-        <Card>
-          <CardNumber>{number}</CardNumber>
-          <CardHolderName>CARDHOLDER NAME</CardHolderName>
-          <CardName>{nameFiled}</CardName>
-        </Card>
-      </CardContainer>
-      <InputHolderContainer>
-        <InputHolder>
-          <Heading>Payment Method</Heading>
+    <MainContainer>
+      <CreditCardDetailsContainer>
+        <CreditCardHeadingContainer>
+          <CreditCardHeading>CREDIT CARD</CreditCardHeading>
+          <HorizontalLine />
+        </CreditCardHeadingContainer>
+        <CardContainer>
+          <Card data-testid="creditCard">
+            <CardNumber>{cardNumber}</CardNumber>
+            <CardholderNameText>CARDHOLDER NAME</CardholderNameText>
+            <CardholderName>{cardholderNameInUppercase}</CardholderName>
+          </Card>
+        </CardContainer>
+      </CreditCardDetailsContainer>
+      <PaymentContainer>
+        <PaymentMethodContainer>
+          <PaymentMethodHeading>Payment Method</PaymentMethodHeading>
           <Input
             type="text"
             placeholder="Card Number"
-            value={number}
-            onChange={onChangeNumber}
+            value={cardNumber}
+            onChange={onChangeCardNumber}
           />
           <Input
             type="text"
             placeholder="Cardholder Name"
-            value={name}
-            onChange={onChangeName}
+            value={cardholderName}
+            onChange={onChangeCardholderName}
           />
-        </InputHolder>
-      </InputHolderContainer>
-    </CreditCardContainer>
+        </PaymentMethodContainer>
+      </PaymentContainer>
+    </MainContainer>
   )
 }
 
